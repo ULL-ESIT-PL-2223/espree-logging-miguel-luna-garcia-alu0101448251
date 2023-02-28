@@ -15,11 +15,12 @@ export async function transpile(inputFile, outputFile) {
 }
 
 export function addLogging(code) {
-  const ast = espree.parse(code, {ecmaVersion:6});
+  const ast = espree.parse(code, {ecmaVersion:6, loc: true});
   estraverse.traverse(ast, {
     enter: function(node, parent) {
       if (node.type === 'FunctionDeclaration' ||
-        node.type === 'FunctionExpression') {
+        node.type === 'FunctionExpression' ||
+        node.type === 'ArrowFunctionExpression') {
         addBeforeCode(node);
       }
     }
@@ -30,8 +31,10 @@ export function addLogging(code) {
 function addBeforeCode(node) {
   const name = node.id ? node.id.name : '<anonymous function>';
   const args = node.params.map( p => "${ "+ p.name +" }" );
-  const beforeCode = "console.log(`Entering " + name + "(" + args.join(', ') + ")`);";
-  const beforeNodes = espree.parse(beforeCode, {ecmaVersion:6, loc: true}).body;
+  const line = node.loc.start.line;
+  const beforeCode = "console.log(`Entering " + 
+    name + "(" + args.join(', ') + ") at line " + line +"`);";
+  const beforeNodes = espree.parse(beforeCode, {ecmaVersion:6}).body;
   node.body.body = beforeNodes.concat(node.body.body);
 }
 
