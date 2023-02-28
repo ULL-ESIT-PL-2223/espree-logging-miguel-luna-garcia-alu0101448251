@@ -3,7 +3,11 @@
 
 ## Resumen de lo aprendido
 
-...
+Al ejecutar la función addLogging podemos observar que añade un console.log() que muestra el nombre de la función que se está llamando. Esto lo consigue de la siguiente manera:
+1. Se genera un AST del código fuente de la función que se le pasa como parámetro.
+2. Se recorre el AST en busca de nodos de tipo `FunctionDeclaration` y `FunctionExpression`.
+3. Se llama a la función `addBeforeCode()`, a la que se le pasa por parámetros el nodo con la llamada a la función.
+4. La función `addBeforeCode()` genera el código del console.log(), lo parsea y lo añade al nodo que se le pasa por parámetros.
 
 ## Indicar los valores de los argumentos
 
