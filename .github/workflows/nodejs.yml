@@ -19,9 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          node-version: 19
       - uses: actions/setup-node@v1
         with:
           node-version: 19
-      - run: npm run cov
+      - run: npm test
 
 
