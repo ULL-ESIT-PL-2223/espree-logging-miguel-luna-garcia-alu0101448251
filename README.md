@@ -14,7 +14,7 @@ Al ejecutar la función addLogging podemos observar que añade un console.log() 
 Se ha modificado el código de `logging-espree.js` para que el log también indique los valores de los argumentos que se pasaron a la función. 
 Ejemplo:
 
-```javascript
+```js
 function foo(a, b) {
   var x = 'blah';
   var y = (function (z) {
@@ -24,13 +24,13 @@ function foo(a, b) {
 foo(1, 'wut', 3);
 ```
 
-```javascript
+```js
 function foo(a, b) {
     console.log(`Entering foo(${ a }, ${ b })`);
     var x = 'blah';
     var y = function (z) {
-        console.log(`Entering <anonymous function>(${ z })`);
-        return z + 3;
+      console.log(`Entering <anonymous function>(${ z })`);
+      return z + 3;
     }(2);
 }
 foo(1, 'wut', 3);
@@ -38,16 +38,40 @@ foo(1, 'wut', 3);
 
 ## CLI con [Commander.js](https://www.npmjs.com/package/commander)
 
-...
+![commander_code](./images/commander.png)  
+![commander_output](./images/commander2.png)  
 
 ## Reto 1: Soportar funciones flecha
 
-...
+1. Añadimos `node.type === 'ArrowFunctionExpression'` a los posibles tipos de nodo que se recorren con `estraverse` en la función `addLogging()`.  
+```js	
+estraverse.traverse(ast, {
+    enter: function(node, parent) {
+      if (node.type === 'FunctionDeclaration' ||
+        node.type === 'FunctionExpression' ||
+        node.type === 'ArrowFunctionExpression') {
+        addBeforeCode(node);
+      }
+    }
+  });
+```
+![arrow_function_example](./images/arrowFuncExample.png)
 
 ## Reto 2: Añadir el número de línea
 
-...
+1. Añadimos la propiedad `loc` a `espree.parse()` en la función `addLogging()` para poder obtener la línea de la función.  
+```js
+  const ast = espree.parse(code, {ecmaVersion:6, loc: true});
+```
+2. Añadimos la información de `node.loc.start.line` en el `console.log()` generado en la función `addBeforeCode()`.  
+```js
+const line = node.loc.start.line;
+const beforeCode = "console.log(`Entering " + 
+  name + "(" + args.join(', ') + ") at line " + line +"`);";
+```
+![line_number_example](./images/lineExample.png)
+
 
 ## Tests and Covering
 
-...
+![tests](./images/tests.png)
