@@ -4,3 +4,4 @@ node_modules
 alus
 escodegen/
 output.js
+.nyc_output/

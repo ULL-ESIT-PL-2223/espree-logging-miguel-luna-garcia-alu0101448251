@@ -23,7 +23,6 @@ for (let i = 0; i < Test.length; i++) {
   it(`transpile(${Tst[i].input}, ${Tst[i].output})`, async () => {
     await transpile(Test[i].input, Test[i].output);
     let output = await fs.readFile(Test[i].output, 'utf-8')
-    console.log("output");
     let correctLogged = await fs.readFile(Test[i].correctLogged, 'utf-8')
     assert.equal(removeSpaces(output), removeSpaces(correctLogged));
     await fs.unlink(Test[i].output);
