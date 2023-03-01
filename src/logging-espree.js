@@ -37,13 +37,3 @@ function addBeforeCode(node) {
   const beforeNodes = espree.parse(beforeCode, {ecmaVersion:6}).body;
   node.body.body = beforeNodes.concat(node.body.body);
 }
-
-// console.log(addLogging(`
-// function foo(a, b) {   
-//   var x = 'blah';   
-//   var y = (function () {
-//     return 3;
-//   })();
-// }
-// foo(1, 'wut', 3);
-// `));
