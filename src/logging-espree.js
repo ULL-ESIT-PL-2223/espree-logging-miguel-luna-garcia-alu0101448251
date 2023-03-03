@@ -3,6 +3,12 @@ import * as espree from "espree";
 import * as estraverse from "estraverse";
 import * as fs from "fs/promises";
 
+
+/**
+ * Transpile the input file and write the output to the output file.
+ * @param {string} inputFile 
+ * @param {string} outputFile 
+ */
 export async function transpile(inputFile, outputFile) {
   let input = await fs.readFile(inputFile, 'utf-8')
   const code = addLogging(input);
@@ -14,6 +20,11 @@ export async function transpile(inputFile, outputFile) {
   console.log('Output written to', outputFile);
 }
 
+/**
+ * Add logging to the input code.
+ * @param {string} code
+ * @returns {string} The code with logging added.
+ */
 export function addLogging(code) {
   const ast = espree.parse(code, {ecmaVersion:6, loc: true});
   estraverse.traverse(ast, {
@@ -28,6 +39,11 @@ export function addLogging(code) {
   return escodegen.generate(ast);
 }
 
+/**
+ * Add code to the beginning of a function.
+ * @param {object} node The function node.
+ * @returns {object} The node with code added.
+ */
 function addBeforeCode(node) {
   const name = node.id ? node.id.name : '<anonymous function>';
   const args = node.params.map( p => "${ "+ p.name +" }" );
