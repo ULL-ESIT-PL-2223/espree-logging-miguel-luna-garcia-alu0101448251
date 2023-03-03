@@ -1,5 +1,5 @@
 {
-    "name": "espree-logging-solution",
+    "name": "@alu0100953275/espree-logging",
     "author": "Miguel Luna García <miguel.luna.19@ull.edu.es>",
     "description": "Adds logs to javascript code",
     "type": "module",
@@ -8,7 +8,7 @@
     },
     "scripts": {
         "test": "mocha test/test.mjs",
-        "cov": "nyc npm test"
+        "cov": "c8 -r=html -o docs/coverage npm test"
     },
     "dependencies": {
         "acorn": "^8.8.2",
@@ -20,6 +20,8 @@
     },
     "version": "0.3.0",
     "devDependencies": {
+        "c8": "^7.13.0",
+        "jsdoc-to-markdown": "^8.0.0",
         "mocha": "^10.2.0",
         "nyc": "^15.1.0"
     }
