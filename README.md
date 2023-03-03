@@ -76,6 +76,10 @@ const beforeCode = "console.log(`Entering " +
 
 ![tests](./images/tests.png)
 
+## Paquete publicado en npm
 
-[Documentación](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/)
-[Coverage](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/coverage/)
+[Paquete en npm](https://www.npmjs.com/package/@alu0101448251/espree-logging)
+
+
+[Documentación](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/)  
+[Coverage](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/coverage/)  
