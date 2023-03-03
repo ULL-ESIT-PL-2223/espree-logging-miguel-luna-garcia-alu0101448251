@@ -75,3 +75,7 @@ const beforeCode = "console.log(`Entering " +
 ## Tests and Covering
 
 ![tests](./images/tests.png)
+
+
+[Documentación](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/)
+[Coverage](https://ull-esit-pl-2223.github.io/espree-logging-miguel-luna-garcia-alu0101448251/coverage/)
