@@ -8,7 +8,8 @@
     },
     "scripts": {
         "test": "mocha test/test.mjs",
-        "cov": "c8 -r=html -o docs/coverage npm test"
+        "cov": "c8 npm test",
+        "doc_cov": "c8 -r=html -o docs/coverage npm test"
     },
     "dependencies": {
         "acorn": "^8.8.2",
